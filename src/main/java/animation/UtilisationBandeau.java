@@ -23,11 +23,15 @@ public class UtilisationBandeau {
         
         b.setMessage("Hello");
         
-        EffetDAnimation e = new EffetDAnimation(b);
+        //EffetDAnimation e = new EffetDAnimation(b);
         
-        e.zoom(5);
-        e.tourneLent();
-        e.tourneRapide();
-        e.clignote();
+        ZoomEffet z = new ZoomEffet(b);
+        TourneEffet t = new TourneEffet(b);
+        ClignoteEffet c = new ClignoteEffet(b);
+        
+        z.zoom(5);
+        t.tourneLent();
+        t.tourneRapide();
+        c.clignote();
     }
 }
