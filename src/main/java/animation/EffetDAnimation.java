@@ -14,7 +14,11 @@ import java.awt.Font;
  */
 public class EffetDAnimation {
     
-    private Bandeau aBandeau = new Bandeau();
+    public Bandeau aBandeau;
+    
+    public EffetDAnimation(Bandeau pBandeau){
+        aBandeau = pBandeau;
+    }
     
     /**
      * Augmente la taille de la police en fonction du multiplicateur entré en paramètre
@@ -27,10 +31,12 @@ public class EffetDAnimation {
         }
         int tailleFinale = aBandeau.getFont().getSize()*multiplicateur;
         for (int i = aBandeau.getFont().getSize(); i < tailleFinale ; i+=5) {
-		aBandeau.setFont(new Font("Dialog", Font.BOLD, 5+i));
+		aBandeau.setFont(new Font(aBandeau.getFont().getName(),aBandeau.getFont().getStyle(), 5+i));
 		aBandeau.sleep(100);
 	}
     }
+    
+    
     
     /**
      * Fait faire un tour complet au texte (lentement)
@@ -56,9 +62,14 @@ public class EffetDAnimation {
      * Fait clignoter le texte une fois
      */
     public void clignote(){
-        aBandeau.sleep(100);
-        aBandeau.setMessage(aBandeau.getMessage());
-        aBandeau.sleep(100);
+        Color back = aBandeau.getBackground();
+        Color fore = aBandeau.getForeground();
+        aBandeau.sleep(500);
+        aBandeau.setForeground(back);
+        aBandeau.sleep(500);
+        aBandeau.setForeground(fore);
+        aBandeau.sleep(500);
     }
+    
     
 }
