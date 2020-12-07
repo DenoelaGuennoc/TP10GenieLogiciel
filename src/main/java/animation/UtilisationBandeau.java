@@ -62,5 +62,7 @@ public class UtilisationBandeau {
         s.ajouterEtape(dc,1);
         s.ajouterEtape(tc,2);
         s.executeScenario();
+        
+        b.close();
     }
 }
