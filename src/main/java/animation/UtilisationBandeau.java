@@ -28,10 +28,9 @@ public class UtilisationBandeau {
         ZoomEffet z = new ZoomEffet(b);
         TourneEffet t = new TourneEffet(b);
         ClignoteEffet c = new ClignoteEffet(b);
-        
-        z.zoom(5);
-        t.tourneLent();
-        t.tourneRapide();
-        c.clignote();
+             
+        ScenarioDAnimation s = new ScenarioDAnimation();
+        s.ajouterEtape(t,3);
+        s.executeScenario();
     }
 }

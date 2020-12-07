@@ -12,16 +12,24 @@ import java.awt.Font;
  *
  * @author Denoëla
  */
-public class EffetDAnimation {
+public abstract class EffetDAnimation {
     
     public Bandeau aBandeau;
-    
-    public EffetDAnimation(){
-        aBandeau = new Bandeau();
-    }
+    public int aVitesse;
     
     public EffetDAnimation(Bandeau pBandeau){
+        this.aBandeau = pBandeau;
+        this.aVitesse = 1;
+    }
+    
+    public EffetDAnimation(Bandeau pBandeau, int vitesse){
         aBandeau = pBandeau;
+        if(vitesse < 1){
+            throw new IllegalArgumentException ("la vitesse d'un effet doit être supérieure à 1");
+        }
+        else {
+            this.aVitesse = vitesse;
+        }
     }
     
     public Bandeau getBandeau(){
@@ -31,4 +39,14 @@ public class EffetDAnimation {
     public void setBandeau(Bandeau pBandeau){
         aBandeau = pBandeau;
     }
+    
+    public int getVitesse(){
+        return aVitesse;
+    }
+    
+    public void setVitesse(int vitesse){
+        aVitesse = vitesse;
+    }
+    
+    public abstract void executeEffet();
 }

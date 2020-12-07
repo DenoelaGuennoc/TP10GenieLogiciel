@@ -12,27 +12,48 @@ import java.awt.Font;
  */
 public class TourneEffet extends EffetDAnimation {
     
+    public boolean aSensHoraire = true;
+    
     public TourneEffet(Bandeau pBandeau){
         super(pBandeau);
     }
     
-    /**
-     * Fait faire un tour complet au texte (lentement)
-     */
-    public void tourneLent(){
-        for (int i = 0; i <= 100; i++) {
-		aBandeau.setRotation(2*Math.PI*i / 100);
-		aBandeau.sleep(100);
-	}
+    public TourneEffet(Bandeau pBandeau, int vitesse){
+        super(pBandeau, vitesse);
     }
     
     /**
-     * Fait faire un tour complet au texte (vite)
+     * @return true si le texte tourne dans le sens horaire
      */
-    public void tourneRapide(){
-        for (int i = 0; i <= 100; i+=10) {
-		aBandeau.setRotation(2*Math.PI*i / 100);
-		aBandeau.sleep(100);
-	}
+    public boolean getSensRotation(){
+        return aSensHoraire;
     }
+    
+    /**
+     * True si le texte tourne dans le sens horaire, false sinon
+     * @param sens 
+     */
+    public void setSensRotation(boolean sens){
+        this.aSensHoraire = sens;
+    }
+    
+    /**
+     * Fait tourner le texte dans le sens horaire ou anti-horaire à 360°
+     */
+    @Override
+    public void executeEffet(){
+        if(aSensHoraire){
+            for (int i = 0; i <= 100; i+=aVitesse){
+                aBandeau.setRotation(2*Math.PI*i / 100);
+                aBandeau.sleep(100);
+            }
+        }
+        else{
+            for (int i = 100; i >= 0; i-=aVitesse){
+                aBandeau.setRotation(2*Math.PI*i / 100);
+                aBandeau.sleep(100);
+            }
+        }
+    }
+    
 }

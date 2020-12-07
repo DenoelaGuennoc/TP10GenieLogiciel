@@ -13,34 +13,41 @@ import java.awt.Font;
  */
 public class ZoomEffet extends EffetDAnimation {
     
+    int aMultiplicateur;
+    
     public ZoomEffet(Bandeau pBandeau){
         super(pBandeau);
+        this.aMultiplicateur = 1;
+    }
+    
+    public ZoomEffet(Bandeau pBandeau, int vitesse){
+        super(pBandeau, vitesse);
+        this.aMultiplicateur = 1;
+    }
+    
+    public int getMultiplicateur(){
+        return aMultiplicateur;
+    }
+    
+    public void setMultiplicateur(int multiplicateur){
+        if(multiplicateur < 1){
+            throw new IllegalArgumentException ("le multiplicateur du zoom doit être supérieur à 1");
+        }
+        else{
+            this.aMultiplicateur = multiplicateur;
+        }
     }
     
     /**
-     * Multipli la taille du texte par un facteur 5 par défaut
+     * Augmente la taille de la police en fonction du multiplicateur associé à l'objet
      */
-    public void zoom(){
-        int tailleFinale = aBandeau.getFont().getSize()*5;
-        for (int i = aBandeau.getFont().getSize(); i < tailleFinale ; i+=5) {
-		aBandeau.setFont(new Font(aBandeau.getFont().getName(),aBandeau.getFont().getStyle(), 5+i));
+    @Override
+    public void executeEffet(){
+        int tailleFinale = aBandeau.getFont().getSize()*aMultiplicateur;
+        for (int i = aBandeau.getFont().getSize(); i < tailleFinale ; i+= this.aVitesse) {
+		aBandeau.setFont(new Font(aBandeau.getFont().getName(),aBandeau.getFont().getStyle(), i));
 		aBandeau.sleep(100);
 	}
     }
     
-     /**
-     * Augmente la taille de la police en fonction du multiplicateur entré en paramètre
-     * de la méthode. Ce paramètre doit être un entier supérieur à 1.
-     * @param multiplicateur 
-     */
-    public void zoom(int multiplicateur){
-        if(multiplicateur <= 1){
-            throw new IllegalArgumentException ("Le multiplicateur doit être supérieur à 1");
-        }
-        int tailleFinale = aBandeau.getFont().getSize()*multiplicateur;
-        for (int i = aBandeau.getFont().getSize(); i < tailleFinale ; i+=5) {
-		aBandeau.setFont(new Font(aBandeau.getFont().getName(),aBandeau.getFont().getStyle(), 5+i));
-		aBandeau.sleep(100);
-	}
-    }
 }

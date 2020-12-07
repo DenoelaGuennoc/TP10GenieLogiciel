@@ -20,7 +20,8 @@ public class ClignoteEffet extends EffetDAnimation {
     /**
      * Fait clignoter le texte une fois
      */
-    public void clignote(){
+    @Override
+    public void executeEffet(){
         Color back = aBandeau.getBackground();
         Color fore = aBandeau.getForeground();
         aBandeau.sleep(500);
