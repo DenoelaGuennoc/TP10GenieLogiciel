@@ -1,5 +1,5 @@
 /*
- * Classe regroupant les effets de zoom du bandeau
+ * Classe regroupant les effets de dézoom du bandeau
  */
 package animation;
 
@@ -11,16 +11,16 @@ import java.awt.Font;
  *
  * @author Denoëla
  */
-public class ZoomEffet extends EffetDAnimation {
+public class DezoomEffet extends EffetDAnimation {
     
     int aMultiplicateur;
     
-    public ZoomEffet(Bandeau pBandeau){
+    public DezoomEffet(Bandeau pBandeau){
         super(pBandeau);
         this.aMultiplicateur = 2;
     }
     
-    public ZoomEffet(Bandeau pBandeau, int vitesse){
+    public DezoomEffet(Bandeau pBandeau, int vitesse){
         super(pBandeau, vitesse);
         this.aMultiplicateur = 2;
     }
@@ -39,12 +39,12 @@ public class ZoomEffet extends EffetDAnimation {
     }
     
     /**
-     * Augmente la taille de la police en fonction du multiplicateur associé à l'objet
+     * Diminue la taille de la police en fonction du multiplicateur associé à l'objet
      */
     @Override
     public void executeEffet(){
-        int tailleFinale = aBandeau.getFont().getSize()*aMultiplicateur;
-        for (int i = aBandeau.getFont().getSize(); i < tailleFinale ; i+= this.aVitesse) {
+        int tailleFinale = aBandeau.getFont().getSize() / aMultiplicateur;
+        for (int i = aBandeau.getFont().getSize(); i > tailleFinale ; i-= this.aVitesse) {
 		aBandeau.setFont(new Font(aBandeau.getFont().getName(),aBandeau.getFont().getStyle(), i));
 		aBandeau.sleep(100);
 	}
